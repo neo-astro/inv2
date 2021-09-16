@@ -1,0 +1,9 @@
+1;software
+2;biotecnologia
+3;alimentos
+4;mate
+5;enfermeria
+6;eo
+7;mater
+8;fisica
+9;quimica
