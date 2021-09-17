@@ -43,7 +43,7 @@ def main():
                 menu2 = Menu("Menu Matriculacion",["1) Matricula","2) Salir"],20,10)
                 opc2 = menu2.menu()
                 if opc2 == "1":
-                    pass
+                    matriculacion()
                 elif opc2 == "2":
                     pass
         elif opc == "3":

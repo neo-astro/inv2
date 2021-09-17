@@ -8,21 +8,19 @@ from colorama import Fore
 
 #----------------Procesos de las Opciones del Menu Mantenimiento------------
 def carreras():
-    validar = Valida
+    validar_carreras = Valida
     borrarPantalla()
     gotoxy(20,2);print("MANTENIMIENTO DE CARRERAS")
-    gotoxy(15,4);print("Codigo: ")
-    gotoxy(15,5);print("Descripcion Carrera: ")
-    gotoxy(25,4);validar.solo_numeros(None, "Debes escribir solo numeros!",25,4)
-    gotoxy(36,5);descarrera = validar.no_vacio(None, "Completa el campo!,solo letras",36,5)
-    archiCarrera = Archivo("./archivos/carrera.txt",";")
-    carreras = archiCarrera.leer()
-    if carreras : idSig = int(carreras[-1][0])+1
+    gotoxy(15,4);print("Descripcion Carrera: ")
+    gotoxy(36,4);descarrera = validar_carreras.no_vacio(None, "Completa el campo!,solo letras",36,4)
+    archivo_carreras = Archivo("./archivos/carrera.txt",";")
+    carrera = archivo_carreras.leer()
+    if carrera : idSig = int(carrera[-1][0])+1
     else: idSig=1
-    carrera = Carrera(idSig,descarrera)
-    datos = carrera.getCarrera()
+    entidad_carrera = Carrera(idSig,descarrera)
+    datos = entidad_carrera.getCarrera()
     datos = ';'.join(datos)
-    archiCarrera.escribir([datos],"a")
+    archivo_carreras.escribir([datos],"a")
     gotoxy(15,7);print(Fore.GREEN + f"Se agrego la carrera {descarrera}")
     time.sleep(1.5)
 
@@ -31,20 +29,23 @@ def materias():
     validar_materia = Valida
     borrarPantalla()
     gotoxy(20,2);print("MANTENIMIENTO DE MATERIAS")
+    #este codigo es con el que busco en archivo.buscar
     gotoxy(15,4);print("Codigo: ")
     gotoxy(15,5);print("Descripcion Carrera: ")
-    gotoxy(25,4);validar_materia.solo_numeros(None, "Debes escribir solo numeros!",25,4)
+    gotoxy(25,4);codigo = validar_materia.solo_numeros(None, "Debes escribir solo numeros!",25,4)
     gotoxy(36,5);descarrera = validar_materia.no_vacio(None, "Completa el campo!,solo letras",36,5)
-    archiCarrera = Archivo("./archivos/carrera.txt",";")
-    carreras = archiCarrera.leer()
-    if carreras : idSig = int(carreras[-1][0])+1
-    else: idSig=1
-    carrera = Carrera(idSig,descarrera)
+    archiCarrera = Archivo("./archivos/materias.txt",";")
+    #carreras = archiCarrera.leer()
+    #if carreras : idSig = int(carreras[-1][0])+1
+    #else: idSig=1
+    #Le mando el codigo ingresado--------------------------------------
+    carrera = Carrera(int(codigo),descarrera)
     datos = carrera.getCarrera()
     datos = ';'.join(datos)
     archiCarrera.escribir([datos],"a")
     gotoxy(15,6);print(Fore.GREEN + f"Se agrego la carrera {descarrera}")
     time.sleep(1.5)
+
 #-----------------------------------------------------
 def periodos():
     validar_periodo = Valida
@@ -53,7 +54,7 @@ def periodos():
     gotoxy(15,4);print("Año del periodo: ")
     gotoxy(15,5);print("Mes del periodo: ")
     gotoxy(15,6);print("Descripcion del periodo: ")
-    
+
     #inputs
 
     gotoxy(36,4);año = validar_periodo.solo_numeros(None, "Debes escribir solo numeros!",36,4)
@@ -67,7 +68,6 @@ def periodos():
     archivo_periodos.escribir([datos],"a")
     gotoxy(15,8); print(Fore.GREEN + "Se agrego el periodo")
     time.sleep(1.5)
-    #periodo = Periodo(año,mes,descarrera)
 
 
 
@@ -149,3 +149,19 @@ def estudiantes():
     else:
         gotoxy(15,11);input(Fore.RED + "Registro No fue Grabado\n presione una tecla para continuar...")
 
+def matriculacion():
+    borrarPantalla()
+    validar_matriculacion = Valida()
+    gotoxy(20,2);print("INGRESO DE MATRICULACION")
+    gotoxy(15,4);print("Estudiante ID:[]")
+    gotoxy(15,5);print("Periodo ID:[]")
+    gotoxy(15,6);print("Carrera ID:[]")
+    gotoxy(15,7);print("Valor de la inscripcion: ")
+    #inputs
+
+    gotoxy(21,4);estudiante = validar_matriculacion.solo_numeros("Completa el campo!. Solo letras",25,4)
+    gotoxy(19,5);Periodo = validar_matriculacion.solo_numeros("Error: Solo numeros",25,5)
+    gotoxy(19,6);carrera = validar_matriculacion.solo_numeros("Completa el campo!,solo letras",25,6)
+    gotoxy(37,7);valor_de_matricula = validar_matriculacion.solo_numeros("Error: Solo numeros",25,7)
+    
+    
