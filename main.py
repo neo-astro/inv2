@@ -30,7 +30,7 @@ def main():
                 elif opc1 == "4":
                     profesores()
                 elif opc1 == "5":
-                    pass
+                    estudiantes()
                 elif opc1 == "6":
                     pass
                 else:

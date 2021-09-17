@@ -14,24 +14,23 @@ class Materia:
     def __init__(self,id, descripcion):
         self.__id = id
         self.descripcion = descripcion
-       
+
     @property
     def id(self):
         return self.__id
 
     def getMateria(self):
         return  [str(self.id),self.descripcion]
-     
+
 class Periodo:
     def __init__(self,periodo,descripcion):
-        self.periodo =periodo     # 202111
+        self.periodo = periodo# 202111
         self.descripcion = descripcion # Segundo semestre 2021
-       
-   
+
     def getPeriodo(self):
-        return  [str(self.periodo),self.descripcion]
-     
-class Profesor: 
+        return  [self.periodo,self.descripcion]
+
+class Profesor:
     def __init__(self,id,nombre,cedula,carrera,titulo,telefono):
         self.__id = id
         self.nombre = nombre
@@ -39,7 +38,7 @@ class Profesor:
         self.titulo = titulo
         self.telefono = telefono
         self.carrera=carrera
-       
+
     @property
     def id(self):
         return self.__id

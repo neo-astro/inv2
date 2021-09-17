@@ -42,12 +42,12 @@ class Archivo:
         return resultado
 
     def escribir(self,datos,modo):
-         with open(self.__archivo, modo, encoding="UTF-8") as file:
+         with open(self.__archivo, modo, encoding="utf-8") as file:
            for dato in datos:
              file.write(dato+'\n')
              
     def escribirM(self,datos,modo):
-      with open(self.__archivo, modo, encoding="UTF-8") as file:
+      with open(self.__archivo, modo, encoding="utf-8") as file:
         for dato in datos:
           linea=''
           for valor in dato:

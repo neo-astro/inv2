@@ -2,3 +2,5 @@
 2;biotecnologia
 3;alimentos
 4;mate
+5;quimica
+6;quimica
