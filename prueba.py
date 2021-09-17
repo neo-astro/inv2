@@ -1,9 +1,5 @@
-string = 'Ayush'
-print(string.isalpha())
-   
-string = 'Ayush0212'
-print(string.isalpha())
-   
-# checking if space is an alphabet
-string = 'Ayush Saxena'
-print( string.isalpha())
+var = "hola a todos "
+var = var.split(" ")
+print(var)
+var = " ".join(var)
+print(var)

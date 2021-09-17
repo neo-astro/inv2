@@ -22,24 +22,27 @@ class Menu:
 class Valida:
     #input vacio
     def no_vacio(self,mensajeError,col,fil):
-        while True:
+        try:
             gotoxy(col,fil)
-            valor = input()
-            try:
-                if  valor: 
-                    for i in valor:
-                        assert i.isalpha()
-                    break
-                
+            son_letras = input()
 
-                else :
-                    raise ValueError
-            except ValueError or AssertionError:
-                gotoxy(col,fil);print(Fore.RED + mensajeError),print(Fore.WHITE + "")
-                time.sleep(1.5)
-                gotoxy(col,fil);print(" "*30)
+            if  son_letras:
+                valor = son_letras.split()
+                for ele in valor:
+                    ele.isalpha()
+                son_letras = " ".join(son_letras)
 
-        return valor
+            else :
+                raise ValueError
+
+        except ValueError or AssertionError:
+            gotoxy(col,fil);print(Fore.RED + mensajeError), print(Fore.WHITE + "")
+            time.sleep(1.5)
+            gotoxy(col,fil);print(" "*30)
+
+        return son_letras
+
+
 
     def solo_numeros(self, mensajeError,col,fil):
         while True:
