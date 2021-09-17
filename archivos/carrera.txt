@@ -1,12 +1,4 @@
-1;adria y matias
-2;adrian perro
-3;quimica
-4;asi domas
-5;mate
-6;adrian
-7;adriansito
-8;quimica
-9;ffvs
-10;4
-11;
-12;
+1;software
+2;biotecnologia
+3;alimentos
+4;mate

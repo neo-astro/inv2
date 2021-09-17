@@ -1,5 +1,3 @@
-var = "hola a todos "
-var = var.split(" ")
-print(var)
-var = " ".join(var)
+var = input()
+var = var.split()
 print(var)

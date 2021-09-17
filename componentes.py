@@ -22,25 +22,42 @@ class Menu:
 class Valida:
     #input vacio
     def no_vacio(self,mensajeError,col,fil):
-        try:
+        while True:
             gotoxy(col,fil)
-            son_letras = input()
+            valor = input()
+            valor = valor.split(" ")
+            lista_comprobar = list(x.isalpha() for x in valor)
+            try:
+                if all(lista_comprobar):
+                    valor = " ".join(valor)
+                    break
+                elif len(valor) == 0 :
+                    raise ValueError
+                else : raise ValueError
+            except ValueError:
+                gotoxy(col,fil);print(Fore.RED + mensajeError), print(Fore.WHITE + "")
+                time.sleep(1.5)
+                gotoxy(col,fil);print(" "*30)
+        return valor
 
-            if  son_letras:
-                valor = son_letras.split()
-                for ele in valor:
-                    ele.isalpha()
-                son_letras = " ".join(son_letras)
 
-            else :
-                raise ValueError
+        # while True:
+        #     gotoxy(col,fil)
+        #     valor = input()
 
-        except ValueError or AssertionError:
-            gotoxy(col,fil);print(Fore.RED + mensajeError), print(Fore.WHITE + "")
-            time.sleep(1.5)
-            gotoxy(col,fil);print(" "*30)
+        #     try:
+        #         valor = valor.split(" ")
+        #         for ele in valor:
+        #             assert ele.isalpha()
+        #         valor =  " ".join(valor)
 
-        return son_letras
+
+        #     except AssertionError or ValueError:
+        #         gotoxy(col,fil);print(Fore.RED + mensajeError), print(Fore.WHITE + "")
+        #         time.sleep(1.5)
+        #         gotoxy(col,fil);print(" "*30)
+                
+        #     return valor
 
 
 
@@ -53,9 +70,9 @@ class Valida:
                     break
             except:
                 gotoxy(col,fil);print(Fore.RED + mensajeError),print(Fore.WHITE + "")
-
                 time.sleep(1.5)
                 gotoxy(col,fil);print(" "*30)
+                
         return valor
 
     def solo_letras(self,mensaje,mensajeError):
@@ -81,5 +98,3 @@ class Valida:
     def cedula():
         pass
     
-class otra:
-    pass    

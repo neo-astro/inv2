@@ -50,12 +50,12 @@ def profesores():
    lisCarrera,entCarrera = [],None
    while not lisCarrera:
       gotoxy(27,8);id = input().upper()
-      archiCarrera = Archivo("./datos/carrera.txt")
+      archiCarrera = Archivo("./archivos/carrera.txt")
       lisCarrera = archiCarrera.buscar(id)
       if lisCarrera:
           entCarrera = Carrera(lisCarrera[0],lisCarrera[1])
           gotoxy(33,8);print(entCarrera.descripcion)
-      else: 
+      else:
          gotoxy(33,8);print("No existe Carrera con ese codigo[{}]:".format(id))
          time.sleep(1);gotoxy(33,8);print(" "*40)
    gotoxy(15,10);print("Esta seguro de Grabar El registro(s/n):")
