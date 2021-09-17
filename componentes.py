@@ -34,10 +34,11 @@ class Valida:
                 elif len(valor) == 0 :
                     raise ValueError
                 else : raise ValueError
+
             except ValueError:
                 gotoxy(col,fil);print(Fore.RED + mensajeError), print(Fore.WHITE + "")
                 time.sleep(1.5)
-                gotoxy(col,fil);print(" "*30)
+                gotoxy(col,fil);print(" "*40)
         return valor
 
 

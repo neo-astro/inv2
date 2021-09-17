@@ -5,7 +5,7 @@ from entidadesUnemi import *
 from datetime import date
 import time
 from colorama import Fore
-
+from validar_id import validar_el_id
 #----------------Procesos de las Opciones del Menu Mantenimiento------------
 def carreras():
     validar_carreras = Valida
@@ -87,17 +87,20 @@ def profesores():
    gotoxy(25,5);cedula = validar_pro.solo_numeros("Error: Solo numeros",25,5)
    gotoxy(25,6);titulo_docente = validar_pro.no_vacio("Completa el campo!,solo letras",25,6)
    telefono=validar_pro.solo_numeros("Error: Solo numeros",25,7)
-   lisCarrera,entCarrera = [],None
-   while not lisCarrera:
-      gotoxy(27,8);id = input()
-      archiCarrera = Archivo("./archivos/carrera.txt",";")
-      lisCarrera = archiCarrera.buscar(id)
-      if lisCarrera:
-          entCarrera = Carrera(lisCarrera[0],lisCarrera[1])
-          gotoxy(33,8);print(entCarrera.descripcion)
-      else:
-         gotoxy(33,8);print(Fore.RED + "No existe Carrera con ese codigo[{}]:".format(id))
-         time.sleep(1);gotoxy(33,8);print(" "*40)
+   #liscarrera,entcarrera = [],None
+
+   #validar_el_id('Carrera',"./archivos/carrera.txt",27,8)
+   entidad_carrera = (validar_el_id('Carrera',"./archivos/carrera.txt",27,8))
+#    while not lisCarrera:
+#       gotoxy(27,8);id = input()
+#       archiCarrera = Archivo("./archivos/carrera.txt",";")
+#       lisCarrera = archiCarrera.buscar(id)
+#       if lisCarrera:
+#           entCarrera = Carrera(lisCarrera[0],lisCarrera[1])
+#           gotoxy(33,8);print(entCarrera.descripcion)
+#       else:
+#          gotoxy(33,8);print(Fore.RED + "No existe Carrera con ese codigo[{}]:".format(id))
+#          time.sleep(1);gotoxy(33,8);print(" "*40)
 
    gotoxy(15,10);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
    gotoxy(54,10);grabar = input().lower()
@@ -107,7 +110,7 @@ def profesores():
         lisProfesores = archiProfesor.leer()
         if lisProfesores : idSig = int(lisProfesores[-1][0])+1
         else: idSig=1
-        entProfesor = Profesor(idSig,nombre,cedula,entCarrera,titulo_docente,telefono)
+        entProfesor = Profesor(idSig,nombre,cedula,entidad_carrera,titulo_docente,telefono)
         datos = entProfesor.getProfesor()
         datos = ';'.join(datos)
         archiProfesor.escribir([datos],"a")
@@ -164,4 +167,5 @@ def matriculacion():
     gotoxy(19,6);carrera = validar_matriculacion.solo_numeros("Completa el campo!,solo letras",25,6)
     gotoxy(37,7);valor_de_matricula = validar_matriculacion.solo_numeros("Error: Solo numeros",25,7)
     
-    
+    archivo_matriculacion = Archivo("./archivos/matriculacion.txt")
+    entidad_matriculacion = Matricula()
