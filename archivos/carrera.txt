@@ -1,2 +1,2 @@
-1;software
-2;alimentos
+1;fisica
+2;quimica

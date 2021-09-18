@@ -5,12 +5,13 @@ from entidadesUnemi import *
 from datetime import date
 import time
 from colorama import Fore
-from validar_id import validar_el_id
+from validar_id import *
 #----------------Procesos de las Opciones del Menu Mantenimiento------------
 def carreras():
     validar_carreras = Valida
     borrarPantalla()
     gotoxy(20,2);print("MANTENIMIENTO DE CARRERAS")
+    gotoxy(15,3);print("Generar carrera, codigo automatico ")
     gotoxy(15,4);print("Descripcion Carrera: ")
     gotoxy(36,4);descarrera = validar_carreras.no_vacio(None, "Completa el campo!,solo letras",36,4)
     archivo_carreras = Archivo("./archivos/carrera.txt",";")
@@ -59,7 +60,7 @@ def periodos():
 
     gotoxy(36,4);año = validar_periodo.solo_numeros(None, "Debes escribir solo numeros!",36,4)
     gotoxy(36,5);mes = validar_periodo.solo_numeros(None, "Debes escribir solo numeros!",36,5)
-    gotoxy(52,6);descarrera = validar_periodo.no_vacio(None, "Completa el campo!,solo letras",52,6)
+    gotoxy(45,6);descarrera = validar_periodo.no_vacio(None, "Completa el campo!,solo letras",45,6)
     archivo_periodos = Archivo("./archivos/periodos.txt")
     periodo = str(año) + str(mes)
     ent_periodo = Periodo(periodo,descarrera)
@@ -84,13 +85,13 @@ def profesores():
    gotoxy(15,7);print("Telefono : ")
    gotoxy(15,8);print("Carrera ID[    ]: ")
    gotoxy(25,4);nombre = validar_pro.no_vacio("Completa el campo!. Solo letras",25,4)
-   gotoxy(25,5);cedula = validar_pro.solo_numeros("Error: Solo numeros",25,5)
+   gotoxy(25,5);cedula = validar_pro.solo_numeros("Solo numeros,no se admite 0 como primer valor",25,5)
    gotoxy(25,6);titulo_docente = validar_pro.no_vacio("Completa el campo!,solo letras",25,6)
-   telefono=validar_pro.solo_numeros("Error: Solo numeros",25,7)
+   telefono=validar_pro.solo_numeros("Solo numeros,no se admite 0 como primer valor",25,7)
    #liscarrera,entcarrera = [],None
 
    #validar_el_id('Carrera',"./archivos/carrera.txt",27,8)
-   entidad_carrera = (validar_el_id('Carrera',"./archivos/carrera.txt",27,8))
+   
 #    while not lisCarrera:
 #       gotoxy(27,8);id = input()
 #       archiCarrera = Archivo("./archivos/carrera.txt",";")
@@ -101,7 +102,7 @@ def profesores():
 #       else:
 #          gotoxy(33,8);print(Fore.RED + "No existe Carrera con ese codigo[{}]:".format(id))
 #          time.sleep(1);gotoxy(33,8);print(" "*40)
-
+   entidad_carrera = validar_id_carreraOperiodo(Carrera,'Carrera',"./archivos/carrera.txt",27,8)
    gotoxy(15,10);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
    gotoxy(54,10);grabar = input().lower()
 
@@ -151,7 +152,7 @@ def estudiantes():
             gotoxy(15,11);input(Fore.GREEN + "Registro Grabado Satisfactoriamente\n Presione una tecla para continuar...")
     else:
         gotoxy(15,11);input(Fore.RED + "Registro No fue Grabado\n presione una tecla para continuar...")
-
+#------------------------------------------------------------------------------
 def matriculacion():
     borrarPantalla()
     validar_matriculacion = Valida()
@@ -162,10 +163,24 @@ def matriculacion():
     gotoxy(15,7);print("Valor de la inscripcion: ")
     #inputs
 
-    gotoxy(21,4);estudiante = validar_matriculacion.solo_numeros("Completa el campo!. Solo letras",25,4)
-    gotoxy(19,5);Periodo = validar_matriculacion.solo_numeros("Error: Solo numeros",25,5)
-    gotoxy(19,6);carrera = validar_matriculacion.solo_numeros("Completa el campo!,solo letras",25,6)
-    gotoxy(37,7);valor_de_matricula = validar_matriculacion.solo_numeros("Error: Solo numeros",25,7)
-    
-    archivo_matriculacion = Archivo("./archivos/matriculacion.txt")
-    entidad_matriculacion = Matricula()
+    entidad_estudiante = validar_id_estudiante(Estudiante,'estudiante',"./archivos/estudiantes.txt",30,4)
+    entidad_periodo = validar_id_carreraOperiodo(Periodo,"periodo","./archivos/periodos.txt",27,5)
+    entidad_carrera = validar_id_carreraOperiodo(Carrera,"carrera","./archivos/carrera.txt",27,6)
+    gotoxy(40,7);valor_de_matricula = validar_matriculacion.solo_numeros("Error: Solo numeros",40,7)
+
+    gotoxy(15,10);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
+    gotoxy(54,10);grabar = input().lower()
+
+    if grabar == "s":
+            archivo_matriculacion = Archivo("./archivos/matriculacion.txt")
+            lis_matriculacion = archivo_matriculacion.leer()
+            if lis_matriculacion : idSig = int(lis_matriculacion[-1][0])+1
+            else: idSig = 1
+            entidad_matriculacion = Matricula(idSig,entidad_estudiante,entidad_carrera,entidad_periodo,valor_de_matricula)
+            datos = entidad_matriculacion.getMatricula()#retorna una lista
+            datos = ";".join(datos)#convierte a cadena
+            archivo_matriculacion.escribir([datos],"a+")
+            gotoxy(15,11);input("Registro Grabado Satisfactoriamente\n Presione una tecla para continuar...")
+    else:
+            gotoxy(15,11);input("Registro No fue Grabado\n presione una tecla para continuar...")
+

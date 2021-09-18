@@ -1,0 +1,6 @@
+1;adrian;0955454;profesor bueno;095545454;1
+2;as;55555555;add;5555555544;2
+3;asd;4;asddsd dsadsd;0044;1
+4;adrian abril;044545;asd;0774;2
+5;asd;1;dsd;1;1
+6;f;5;d;1;2

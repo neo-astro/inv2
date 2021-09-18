@@ -1,3 +1,1 @@
-var = input()
-var = var.split()
-print(var)
+print('\U+1F44E')

@@ -11,8 +11,8 @@ class Archivo:
               line = linea[:-1].split(self.__separador)
               lista.append(line)
         except IOError:
-           lista=[]    
-        return lista       
+           lista=[]
+        return lista
     
     def buscar(self,buscado): 
         resultado = [] 

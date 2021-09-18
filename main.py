@@ -34,7 +34,7 @@ def main():
                 elif opc1 == "6":
                     pass
                 else:
-                    gotoxy(40,18);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),gotoxy(40,18);print(""*30)
+                    gotoxy(40,17);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),gotoxy(40,18);print(""*30)
 
 
 
@@ -57,7 +57,7 @@ def main():
                 print(color.GREEN + "Gracias por su visita..."), time.sleep(1.5), exit()
 
         else:
-            print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),main()
+            gotoxy(40,16);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),main()
 
 
 if __name__ == "__main__":

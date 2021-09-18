@@ -25,10 +25,12 @@ class Valida:
         while True:
             gotoxy(col,fil)
             valor = input()
-            valor = valor.split(" ")
+            valor = valor.split()
             lista_comprobar = list(x.isalpha() for x in valor)
+
+            #lista_comprobar = list(x.isalpha() for x in valor)
             try:
-                if all(lista_comprobar):
+                if valor and all(lista_comprobar):
                     valor = " ".join(valor)
                     break
                 elif len(valor) == 0 :
@@ -69,11 +71,12 @@ class Valida:
             try:
                 if int(valor) > 0:
                     break
-            except:
+                else: raise ValueError
+            except ValueError:
                 gotoxy(col,fil);print(Fore.RED + mensajeError),print(Fore.WHITE + "")
                 time.sleep(1.5)
-                gotoxy(col,fil);print(" "*30)
-                
+                gotoxy(col,fil);print(" "*50)
+
         return valor
 
     def solo_letras(self,mensaje,mensajeError):
