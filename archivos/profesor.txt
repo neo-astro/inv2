@@ -1,2 +1,1 @@
-1;adrian abril;09485454;profesor nuevo;094548155;2
-2;matias cazares;04545151;profesor antiguo;000045454;1
+1;adrian abril;098454545;profe de software;0945511545;1

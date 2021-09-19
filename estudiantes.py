@@ -31,21 +31,26 @@ def materias():
     borrarPantalla()
     gotoxy(20,2);print("MANTENIMIENTO DE MATERIAS")
     #este codigo es con el que busco en archivo.buscar
-    gotoxy(15,4);print("Codigo: ")
-    gotoxy(15,5);print("Descripcion Carrera: ")
-    gotoxy(25,4);codigo = validar_materia.solo_numeros(None, "Debes escribir solo numeros!",25,4)
-    gotoxy(36,5);descarrera = validar_materia.no_vacio(None, "Completa el campo!,solo letras",36,5)
-    archiCarrera = Archivo("./archivos/materias.txt",";")
-    #carreras = archiCarrera.leer()
-    #if carreras : idSig = int(carreras[-1][0])+1
-    #else: idSig=1
-    #Le mando el codigo ingresado--------------------------------------
-    carrera = Carrera(int(codigo),descarrera)
-    datos = carrera.getCarrera()
-    datos = ';'.join(datos)
-    archiCarrera.escribir([datos],"a")
-    gotoxy(15,6);print(Fore.GREEN + f"Se agrego la carrera {descarrera}")
-    time.sleep(1.5)
+    gotoxy(15,4);print("Generar carrera, codigo automatico ")
+    gotoxy(15,5);print("Descripcion de la materia: ")
+    gotoxy(42,5);desmateria = validar_materia.no_vacio(None, "Completa el campo!,solo letras",42,5)
+
+    gotoxy(15,7);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
+    gotoxy(54,7);grabar = input().lower()
+
+    if grabar == "s":
+        archivo_materias = Archivo("./archivos/materias.txt")
+        lismaterias = archivo_materias.leer()
+        if lismaterias : idSig = int(lismaterias[-1][0])+1
+        else: idSig=1
+        entmateria = Materia(idSig,desmateria)
+        datos = entmateria.getMateria()
+        datos = ';'.join(datos)
+        archivo_materias.escribir([datos],"a")
+        gotoxy(15,10); print(f"Codigo de la materia= {idSig}")
+        gotoxy(15,11);input("Registro Grabado Satisfactoriamente\n Presione una tecla para continuar...")
+    else:
+        gotoxy(15,11);input("Registro No fue Grabado\n presione una tecla para continuar...")
 
 #-----------------------------------------------------
 def periodos():
@@ -60,15 +65,24 @@ def periodos():
 
     gotoxy(36,4);año = validar_periodo.solo_numeros(None, "Debes escribir solo numeros!",36,4)
     gotoxy(36,5);mes = validar_periodo.solo_numeros(None, "Debes escribir solo numeros!",36,5)
-    gotoxy(45,6);descarrera = validar_periodo.no_vacio(None, "Completa el campo!,solo letras",45,6)
-    archivo_periodos = Archivo("./archivos/periodos.txt")
-    periodo = str(año) + str(mes)
-    ent_periodo = Periodo(periodo,descarrera)
-    datos = ent_periodo.getPeriodo()
-    datos = ';'.join(datos)
-    archivo_periodos.escribir([datos],"a")
-    gotoxy(15,8); print(Fore.GREEN + "Se agrego el periodo")
-    time.sleep(1.5)
+    gotoxy(45,6);desperiodo = validar_periodo.no_vacio(None, "Completa el campo!,solo letras",45,6)
+    desperiodo = desperiodo + f" inicia el {mes} de {año} "
+    gotoxy(15,7);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
+    gotoxy(54,7);grabar = input().lower()
+
+    if grabar == "s":
+        archivo_periodos = Archivo("./archivos/periodos.txt")
+        lisperiodo = archivo_periodos.leer()
+        if lisperiodo : idSig = int(lisperiodo[-1][0])+1
+        else: idSig=1
+        entperiodo = Periodo(idSig,desperiodo)
+        datos = entperiodo.getPeriodo()
+        datos = ';'.join(datos)
+        archivo_periodos.escribir([datos],"a")
+        gotoxy(15,10); print(f"Codigo del periodo = {idSig}")
+        gotoxy(15,11);input("Registro Grabado Satisfactoriamente\n Presione una tecla para continuar...")
+    else:
+        gotoxy(15,11);input("Registro No fue Grabado\n presione una tecla para continuar...")
 
 
 
@@ -118,7 +132,7 @@ def estudiantes():
 
     gotoxy(25,4);nombre = validar_estudiantes.no_vacio("Completa el campo!. Solo letras",25,4)
     gotoxy(25,5);cedula = validar_estudiantes.solo_numeros("Error: Solo numeros",25,5)
-    gotoxy(27,6);direccion = validar_estudiantes.solo_letras("Completa el campo!,solo letras",27,6)
+    gotoxy(27,6);direccion = validar_estudiantes.no_vacio("Completa el campo!,solo letras",27,6)
     gotoxy(25,7);telefono = validar_estudiantes.solo_numeros("Error: Solo numeros",25,7)
 
 
@@ -186,8 +200,8 @@ def notas():
     #estas var entidades almacenan el codigo de dicha entidad
     entidad_periodo = validar_id_ca_pe_ma(Periodo,"periodo","./archivos/periodos.txt",27,4)
     entidad_estudiante = validar_id_estudiante(Estudiante,'estudiante',"./archivos/estudiantes.txt",30,5)
-    entidad_materia = validar_id_ca_pe_ma(Carrera,"materia","./archivos/materias.txt",27,6)
-    entidad_profesor = validar_id_ca_pe_ma(Carrera,"profesor","./archivos/profesor.txt",27,7)
+    entidad_materia = validar_id_ca_pe_ma(Materia,"materia","./archivos/materias.txt",27,6)
+    entidad_profesor = validar_id_profesor(Profesor,"profesor","./archivos/profesor.txt",28,7)
     gotoxy(22,7);nota1 = validar_notas.solo_numeros("Error: Solo numeros",40,8)
     gotoxy(22,8);nota2 = validar_notas.solo_numeros("Error: Solo numeros",40,9)
 
@@ -199,8 +213,8 @@ def notas():
             lis_notas = archivo_notas.leer()
             if lis_notas: idSig = int(lis_notas[-1][0])+1
             else: idSig = 1
-            entidad_notas = Matricula(idSig,entidad_periodo,entidad_estudiante,entidad_materia,entidad_profesor,nota1,nota2)
-            datos = entidad_notas.getMatricula()#retorna una lista
+            entidad_notas = Notas(idSig,entidad_periodo,entidad_estudiante,entidad_materia,entidad_profesor,nota1,nota2)
+            datos = entidad_notas.getNotas()#retorna una lista
             datos = ";".join(datos)#convierte a cadena
             archivo_notas.escribir([datos],"a+")
             gotoxy(15,11);input("Registro Grabado Satisfactoriamente\n Presione una tecla para continuar...")

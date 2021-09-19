@@ -10,8 +10,8 @@ import time
 
 # Menu Principal
 def main():
-    salir = True
-    while salir:
+    opc = ""
+    while opc != "4":
         borrarPantalla()
         menu = Menu("Menu Principal",["1) Mantenimiento","2) Matriculacion","3) Notas","4) Salir"],20,10)
         opc = menu.menu()

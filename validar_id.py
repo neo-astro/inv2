@@ -15,7 +15,7 @@ def validar_id_ca_pe_ma(nom_enti,nombre_de_entidad,arc,col,fil):
         lista = archivo.buscar(valor)
         if lista:
             entidad = nom_enti(lista[0],lista[1])
-            gotoxy(col+10,fil);print(Fore.GREEN + lista[1])
+            gotoxy(col+7,fil);print(Fore.GREEN + lista[1])
         else:
             gotoxy(col+5,fil);print(Fore.RED + f"No existe {nombre_de_entidad} con ese codigo[{valor}]:")
             time.sleep(1.5);gotoxy(col,fil);print(" "*50)
@@ -57,3 +57,5 @@ def validar_id_profesor(nom_enti,nombre_de_entidad,arc,col,fil):
             time.sleep(1.5);gotoxy(col,fil);print(" "*60)
 
     return entidad
+
+

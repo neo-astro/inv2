@@ -1,1 +1,2 @@
-202106;segundo periodo
+1;segundo semestre inicia el 06 de 2020 
+2;primer semestre en linea inicia el 02 de 2021 
