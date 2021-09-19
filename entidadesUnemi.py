@@ -32,7 +32,7 @@ class Periodo:
         return self.__id
      
     def getPeriodo(self):
-        return  [self.__id,self.descripcion]
+        return  [str(self.__id),self.descripcion]
 
 class Profesor:
     def __init__(self,id,nombre,cedula,carrera,titulo,telefono):

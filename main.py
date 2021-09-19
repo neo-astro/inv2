@@ -34,24 +34,38 @@ def main():
                 elif opc1 == "6":
                     pass
                 else:
-                    gotoxy(40,17);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),gotoxy(40,18);print(""*30)
+                    gotoxy(40,18);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),gotoxy(40,18);print(""*30)
 
 
 
         elif opc == "2":
-                borrarPantalla()
-                menu2 = Menu("Menu Matriculacion",["1) Matricula","2) Salir"],20,10)
-                opc2 = menu2.menu()
-                if opc2 == "1":
-                    matriculacion()
-                elif opc2 == "2":
-                    pass
+                opc2 = ""
+                while opc2 !='2':
+                    borrarPantalla()
+                    menu2 = Menu("Menu Matriculacion",["1) Matricula","2) Salir"],20,10)
+                    opc2 = menu2.menu()
+                    if opc2 == "1":
+                        matriculacion()
+                    elif opc2 == "2":
+                        pass
+                    else:
+                        gotoxy(40,14);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),gotoxy(40,14);print(""*30)
+
+
         elif opc == "3":
-                borrarPantalla()
-                menu3 = Menu("Menu Notas",["1) Notas","2) Salir"],20,10)
-                opc3 = menu3.menu()
-                if opc3 == "1":
-                    pass
+                opc3 = ""
+                while opc3 != "2":
+                    borrarPantalla()
+                    menu3 = Menu("Menu Notas",["1) Notas","2) Salir"],20,10)
+                    opc3 = menu3.menu()
+
+                    if opc3 == "1":
+                        notas()
+                    elif opc3 == "2":
+                        pass
+                    else:
+                        gotoxy(40,14);print(color.RED + "Opcion no valida"), time.sleep(1.5),print(color.WHITE + ""),gotoxy(40,14);print(""*30)
+
 
         elif opc == "4":
                 print(color.GREEN + "Gracias por su visita..."), time.sleep(1.5), exit()

@@ -1,1 +1,2 @@
 1;matematicas
+2;fisica

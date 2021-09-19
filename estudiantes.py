@@ -88,21 +88,8 @@ def profesores():
    gotoxy(25,5);cedula = validar_pro.solo_numeros("Solo numeros,no se admite 0 como primer valor",25,5)
    gotoxy(25,6);titulo_docente = validar_pro.no_vacio("Completa el campo!,solo letras",25,6)
    telefono=validar_pro.solo_numeros("Solo numeros,no se admite 0 como primer valor",25,7)
-   #liscarrera,entcarrera = [],None
 
-   #validar_el_id('Carrera',"./archivos/carrera.txt",27,8)
-   
-#    while not lisCarrera:
-#       gotoxy(27,8);id = input()
-#       archiCarrera = Archivo("./archivos/carrera.txt",";")
-#       lisCarrera = archiCarrera.buscar(id)
-#       if lisCarrera:
-#           entCarrera = Carrera(lisCarrera[0],lisCarrera[1])
-#           gotoxy(33,8);print(entCarrera.descripcion)
-#       else:
-#          gotoxy(33,8);print(Fore.RED + "No existe Carrera con ese codigo[{}]:".format(id))
-#          time.sleep(1);gotoxy(33,8);print(" "*40)
-   entidad_carrera = validar_id_carreraOperiodo(Carrera,'Carrera',"./archivos/carrera.txt",27,8)
+   entidad_carrera = validar_id_ca_pe_ma(Carrera,'Carrera',"./archivos/carrera.txt",27,8)
    gotoxy(15,10);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
    gotoxy(54,10);grabar = input().lower()
 
@@ -131,7 +118,7 @@ def estudiantes():
 
     gotoxy(25,4);nombre = validar_estudiantes.no_vacio("Completa el campo!. Solo letras",25,4)
     gotoxy(25,5);cedula = validar_estudiantes.solo_numeros("Error: Solo numeros",25,5)
-    gotoxy(25,6);direccion = validar_estudiantes.no_vacio("Completa el campo!,solo letras",25,6)
+    gotoxy(27,6);direccion = validar_estudiantes.solo_letras("Completa el campo!,solo letras",27,6)
     gotoxy(25,7);telefono = validar_estudiantes.solo_numeros("Error: Solo numeros",25,7)
 
 
@@ -164,8 +151,8 @@ def matriculacion():
     #inputs
 
     entidad_estudiante = validar_id_estudiante(Estudiante,'estudiante',"./archivos/estudiantes.txt",30,4)
-    entidad_periodo = validar_id_carreraOperiodo(Periodo,"periodo","./archivos/periodos.txt",27,5)
-    entidad_carrera = validar_id_carreraOperiodo(Carrera,"carrera","./archivos/carrera.txt",27,6)
+    entidad_periodo = validar_id_ca_pe_ma(Periodo,"periodo","./archivos/periodos.txt",27,5)
+    entidad_carrera = validar_id_ca_pe_ma(Carrera,"carrera","./archivos/carrera.txt",27,6)
     gotoxy(40,7);valor_de_matricula = validar_matriculacion.solo_numeros("Error: Solo numeros",40,7)
 
     gotoxy(15,10);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
@@ -184,3 +171,38 @@ def matriculacion():
     else:
             gotoxy(15,11);input("Registro No fue Grabado\n presione una tecla para continuar...")
 
+#----------------------------------------------------------------
+def notas():
+    borrarPantalla()
+    validar_notas = Valida()
+    gotoxy(20,2);print("INGRESO DE NOTAS")
+    gotoxy(15,4);print("Periodo ID:[]")
+    gotoxy(15,5);print("Estudiante ID:[]")
+    gotoxy(15,6);print("Materia ID:[]")
+    gotoxy(15,7);print("Profesor ID:[]")
+    gotoxy(15,8);print("Nota 1:")
+    gotoxy(15,9);print("Nota 2:")
+    #inputs
+    #estas var entidades almacenan el codigo de dicha entidad
+    entidad_periodo = validar_id_ca_pe_ma(Periodo,"periodo","./archivos/periodos.txt",27,4)
+    entidad_estudiante = validar_id_estudiante(Estudiante,'estudiante',"./archivos/estudiantes.txt",30,5)
+    entidad_materia = validar_id_ca_pe_ma(Carrera,"materia","./archivos/materias.txt",27,6)
+    entidad_profesor = validar_id_ca_pe_ma(Carrera,"profesor","./archivos/profesor.txt",27,7)
+    gotoxy(22,7);nota1 = validar_notas.solo_numeros("Error: Solo numeros",40,8)
+    gotoxy(22,8);nota2 = validar_notas.solo_numeros("Error: Solo numeros",40,9)
+
+    gotoxy(15,10);print(Fore.GREEN + "Esta seguro de Grabar El registro(s/n):")
+    gotoxy(54,10);grabar = input().lower()
+
+    if grabar == "s":
+            archivo_notas= Archivo("./archivos/notas.txt")
+            lis_notas = archivo_notas.leer()
+            if lis_notas: idSig = int(lis_notas[-1][0])+1
+            else: idSig = 1
+            entidad_notas = Matricula(idSig,entidad_periodo,entidad_estudiante,entidad_materia,entidad_profesor,nota1,nota2)
+            datos = entidad_notas.getMatricula()#retorna una lista
+            datos = ";".join(datos)#convierte a cadena
+            archivo_notas.escribir([datos],"a+")
+            gotoxy(15,11);input("Registro Grabado Satisfactoriamente\n Presione una tecla para continuar...")
+    else:
+            gotoxy(15,11);input("Registro No fue Grabado\n presione una tecla para continuar...")
